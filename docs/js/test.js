@@ -23,25 +23,15 @@
 
   // Download the data
   myConnector.getData = function (table, doneCallback) {
-    var settings = {
-      "url": "https://raw.githubusercontent.com/araki-ka/DataTank/master/data/pcr_positive_daily.csv",
-      "method": "GET",
-      "timeout": 0,
-      "headers": {
-        "Content-Type": "text/csv"
-      },
-    };
-
-    $.ajax(settings).done(function (response) {
-      console.log(response);
-      var feat = response.features,
+    $.getJSON("https://raw.githubusercontent.com/araki-ka/DataTank/master/data/pcr_positive_daily.json", function (resp) {
+      var feat = resp.features,
         tableData = [];
 
-      // Iterate over the CSV object
-      for (var i = 0, len = feat.length; i < len; i++) {
+      // Iterate over the JSON object
+      for (var row = 0, len = feat.length; row < len; i++) {
         tableData.push({
-          "data": feat[i][0],
-          "positive": feat[i][2]
+          "data": feat[row].data,
+          "positive": feat[row].positive
         });
       }
 
@@ -49,13 +39,17 @@
       doneCallback();
     });
   };
-  tableau.registerConnector(myConnector);
+  table.appendRows(tableData);
+  doneCallback();
+});
+  };
+tableau.registerConnector(myConnector);
 
-    // Create event listeners for when the user submits the form
-    $(document).ready(function() {
-        $("#submitButton").click(function() {
-            tableau.connectionName = "PCR CSV"; // This will be the data source name in Tableau
-            tableau.submit(); // This sends the connector object to Tableau
-        });
-    });
-})();
+// Create event listeners for when the user submits the form
+$(document).ready(function () {
+  $("#submitButton").click(function () {
+    tableau.connectionName = "PCR CSV"; // This will be the data source name in Tableau
+    tableau.submit(); // This sends the connector object to Tableau
+  });
+});
+}) ();
