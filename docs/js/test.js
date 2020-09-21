@@ -27,7 +27,7 @@
       var tableData = [];
 
       // Iterate over the JSON object
-      for (var row = 0, len = data.length; row < len; i++) {
+      for (var row = 0, len = data.length; row < len; row++) {
         tableData.push({
           "date": data[row].date,
           "positive": data[row].positive
