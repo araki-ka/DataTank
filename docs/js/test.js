@@ -13,8 +13,8 @@
     }];
 
     var tableSchema = {
-      id: "pcr",
-      alias: "PCR CSV",
+      id: "pcr_positive",
+      alias: "PCR Positive",
       columns: cols
     };
 
@@ -23,15 +23,14 @@
 
   // Download the data
   myConnector.getData = function (table, doneCallback) {
-    $.getJSON("https://raw.githubusercontent.com/araki-ka/DataTank/master/data/pcr_positive_daily.json", function (resp) {
-      var feat = resp.features,
-        tableData = [];
+    $.getJSON("https://raw.githubusercontent.com/araki-ka/DataTank/master/data/pcr_positive_daily.json", function (data) {
+      var tableData = [];
 
       // Iterate over the JSON object
-      for (var row = 0, len = feat.length; row < len; i++) {
+      for (var row = 0, len = data.length; row < len; i++) {
         tableData.push({
-          "data": feat[row].data,
-          "positive": feat[row].positive
+          "date": data[row].date,
+          "positive": data[row].positive
         });
       }
 
@@ -44,8 +43,8 @@
   // Create event listeners for when the user submits the form
   $(document).ready(function () {
     $("#submitButton").click(function () {
-      tableau.connectionName = "PCR CSV"; // This will be the data source name in Tableau
-      tableau.submit(); // This sends the connector object to Tableau
+      tableau.connectionName = "PCR Positive";
+      tableau.submit();
     });
   });
 })();
