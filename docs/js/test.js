@@ -23,7 +23,7 @@
 
   // Download the data
   myConnector.getData = function (table, doneCallback) {
-    $.getJSON("https://raw.githubusercontent.com/araki-ka/DataTank/master/data/pcr_positive_daily.json", function (data) {
+    $.getJSON("https://raw.githubusercontent.com/araki-ka/DataTank/master/data/PCR/pcr_positive_daily.json", function (data) {
       var tableData = [];
 
       // Iterate over the JSON object
