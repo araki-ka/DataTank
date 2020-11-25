@@ -8,13 +8,13 @@
       id: "date",
       dataType: tableau.dataTypeEnum.date
     }, {
-      id: "positive",
+      id: "positives",
       dataType: tableau.dataTypeEnum.int
     }];
 
     var tableSchema = {
-      id: "pcr_positive",
-      alias: "PCR Positive",
+      id: "pcr_positives_in_japan",
+      alias: "PCR Positives in Japan",
       columns: cols
     };
 
@@ -30,7 +30,7 @@
       for (var row = 0, len = data.length; row < len; row++) {
         tableData.push({
           "date": data[row].date,
-          "positive": data[row].positive
+          "positives": data[row].positives
         });
       }
 
@@ -43,7 +43,7 @@
   // Create event listeners for when the user submits the form
   $(document).ready(function () {
     $("#submitButton").click(function () {
-      tableau.connectionName = "PCR Positive";
+      tableau.connectionName = "PCR Positives in Japan";
       tableau.submit();
     });
   });
