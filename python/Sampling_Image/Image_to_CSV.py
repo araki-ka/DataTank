@@ -13,8 +13,7 @@ ret,img = cv.threshold(img, 127, 255, cv.THRESH_BINARY)
 # Array to Numpy
 img_array = np.asarray(img)
 
-# Debug: Show 
-#  Image
+# Debug: Show Image
 # plt.imshow(img_array)
 # plt.show()
 
