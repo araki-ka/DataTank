@@ -23,13 +23,14 @@
 
   // Download the data
   myConnector.getData = function (table, doneCallback) {
-    $.getJSON("https://raw.githubusercontent.com/araki-ka/DataTank/master/data/PCR/pcr_positive_daily.json", function (data) {
+    $.getJSON("https://raw.githubusercontent.com/araki-ka/DataTank/master/data/COVID/covid_report.json", function (data) {
       var tableData = [];
 
       // Iterate over the JSON object
       for (var row = 0, len = data.length; row < len; row++) {
         tableData.push({
           "date": data[row].date,
+          "date": data[row].tests,
           "positives": data[row].positives
         });
       }
