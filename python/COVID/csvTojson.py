@@ -25,5 +25,5 @@ df_covid = df_covid.astype({"positives": object})
 df = pd.merge(df_covid[["date", "positives"]], df_pcr[["date", "tests"]], how="left", on="date")
 
 # write to json file
-with open("../../data/PCR/" + JSONFILE, "w", encoding="utf_8") as jsonfile:
+with open("../../data/COVID/" + JSONFILE, "w", encoding="utf_8") as jsonfile:
   json.dump(json.loads(df.to_json(orient="records")), jsonfile, indent=2)
