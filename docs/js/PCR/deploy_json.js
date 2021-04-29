@@ -30,7 +30,7 @@
       for (var row = 0, len = data.length; row < len; row++) {
         tableData.push({
           "date": data[row].date,
-          "date": data[row].tests,
+          "tests": data[row].tests,
           "positives": data[row].positives
         });
       }
