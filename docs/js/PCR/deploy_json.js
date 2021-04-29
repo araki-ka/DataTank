@@ -8,13 +8,16 @@
       id: "date",
       dataType: tableau.dataTypeEnum.date
     }, {
+      id: "tests",
+      dataType: tableau.dataTypeEnum.int
+    }, {
       id: "positives",
       dataType: tableau.dataTypeEnum.int
     }];
 
     var tableSchema = {
-      id: "pcr_positives_in_japan",
-      alias: "PCR Positives in Japan",
+      id: "covid_report_in_japan",
+      alias: "COVID Report in Japan",
       columns: cols
     };
 
@@ -44,7 +47,7 @@
   // Create event listeners for when the user submits the form
   $(document).ready(function () {
     $("#submitButton").click(function () {
-      tableau.connectionName = "PCR Positives in Japan";
+      tableau.connectionName = "COVID Report in Japan";
       tableau.submit();
     });
   });
