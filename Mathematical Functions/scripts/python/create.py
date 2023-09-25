@@ -4,7 +4,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/../../data/Mathematical Functions/"
+DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/../../data/csv/Mathematical Functions/"
 
 # Parameter
 t1 = np.arange(-10.0, 10.1, 0.1)
