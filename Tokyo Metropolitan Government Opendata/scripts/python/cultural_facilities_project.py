@@ -19,7 +19,7 @@ if __name__=="__main__":
   data = util.marge_csv(CSV_METADATA)
 
   # data preprocessing
-  data["緯度"] = util.replace(data, "緯度", ",")
+  data["緯度"] = util.replace(data, "緯度", ",", "")
 
   # output data mart csv
   util.output_csv(data, OUTPUT_DESTINATION)
