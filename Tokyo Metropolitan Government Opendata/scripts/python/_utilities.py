@@ -21,4 +21,4 @@ def distinct(data):
   return data.drop_duplicates()
 
 def output_csv(data, output_destination):
-  data.to_csv(output_destination, mode="w", index=False, quoting=csv.QUOTE_ALL)
+  data.to_csv(output_destination, mode="w", index=False, quoting=csv.QUOTE_ALL, encoding="utf-8")
