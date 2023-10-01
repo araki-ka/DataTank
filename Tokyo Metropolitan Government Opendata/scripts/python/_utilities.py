@@ -11,8 +11,8 @@ def marge_csv(csv_metadata):
     data = download_csv(target_csv[0], target_csv[1], csv_metadata["header"], csv_metadata["dropna"])
     return pd.concat([output, data])
 
-def replace(data, column, trim_strings):
-  return data[column].str.replace(trim_strings, "")
+def replace(data, column, trim_strings, replace_strings):
+  return data[column].str.replace(trim_strings, replace_strings)
 
 def strip(data, column):
   return data[column].str.strip()
