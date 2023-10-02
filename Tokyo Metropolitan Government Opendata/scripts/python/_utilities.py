@@ -11,6 +11,12 @@ def marge_csv(csv_metadata):
     data = download_csv(target_csv[0], target_csv[1], csv_metadata["header"], csv_metadata["dropna"])
     return pd.concat([output, data])
 
+def join_csv(left_data, join_type, right_data, on_key):
+  if join_type in ["left", "right", "inner", "outer", "cross"]:
+    return left_data.merge(right_data, on=on_key, how=join_type)
+  else:
+    return left_data.merge(right_data, on=on_key, how="left")
+
 def replace(data, column, trim_strings, replace_strings):
   return data[column].str.replace(trim_strings, replace_strings)
 
