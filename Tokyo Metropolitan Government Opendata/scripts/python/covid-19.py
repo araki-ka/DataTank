@@ -1,29 +1,38 @@
 # coding:UTF-8
-import requests
-import io
-import pandas as pd
-import json
+import _utilities as util
 
-PCR_TEST_CSVFILE = "https://www.mhlw.go.jp/content/pcr_tested_daily.csv"
-COVID_POSITIVE_CSVFILE = "https://www.mhlw.go.jp/content/pcr_positive_daily.csv"
-JSONFILE = "covid_report.json"
+# metadata
+PCR_CSV_METADATA = {
+  "target_url_list": [
+    ["https://www.mhlw.go.jp/content/001060467.csv", "utf8"]
+  ],
+  "header": ["日付","PCR 検査実施人数(単日)"],
+  "dropna": ["日付"],
+}
 
-# get data
-## PCR Test
-pcr_data = requests.get(PCR_TEST_CSVFILE).content
-df_pcr = pd.read_csv(io.BytesIO(pcr_data))
-df_pcr = df_pcr.rename(columns={"日付": "date", "PCR 検査実施件数(単日)": "tests"})
-df_pcr = df_pcr.astype({"tests": object})
+POSITIVE_CSV_METADATA = {
+  "target_url_list": [
+    ["https://covid19.mhlw.go.jp/public/opendata/newly_confirmed_cases_daily.csv", "utf8"]
+  ],
+  "header": ["Date", "ALL"],
+  "dropna": ["Date"],
+}
 
-## COVID Positive
-covid_data = requests.get(COVID_POSITIVE_CSVFILE).content
-df_covid = pd.read_csv(io.BytesIO(covid_data))
-df_covid = df_covid.rename(columns={"日付": "date", "PCR 検査陽性者数(単日)": "positives"})
-df_covid = df_covid.astype({"positives": object})
+OUTPUT_DESTINATION = "../../data/COVID-19/csv/output.csv"
 
-## merge  data
-df = pd.merge(df_covid[["date", "positives"]], df_pcr[["date", "tests"]], how="left", on="date")
+# main
+if __name__=="__main__":
+  # download and merge csv
+  pcr_data = util.marge_csv(PCR_CSV_METADATA)
+  positive_data = util.marge_csv(POSITIVE_CSV_METADATA)
 
-# write to json file
-with open("../../data/COVID/" + JSONFILE, "w", encoding="utf_8") as jsonfile:
-  json.dump(json.loads(df.to_json(orient="records")), jsonfile, indent=2)
+  # data preprocessing
+  pcr_data = pcr_data.rename(columns={"日付": "date", "PCR 検査実施人数(単日)": "tests"})
+  pcr_data.fillna(0, inplace=True)
+  pcr_data = pcr_data.astype({"tests": "int64"})
+  positive_data = positive_data.rename(columns={"Date": "date", "ALL": "positives"})
+  positive_data = positive_data.astype({"positives": "int64"})
+  data = util.join_csv(pcr_data, "left", positive_data, "date")
+
+  # output data mart csv
+  util.output_csv(data, OUTPUT_DESTINATION)
