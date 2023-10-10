@@ -21,7 +21,7 @@ CSV_METADATA = {
 OUTPUT_DESTINATION = "../../../data/Tokyo Metropolitan Government/Life and Statistics/csv/output.csv"
 
 # main
-if __name__=="__main__":
+def main():
   # download csv
   data = pd.DataFrame(columns=["年"].extend(CSV_METADATA["header"]))
   for index, target_csv in enumerate(CSV_METADATA["target_url_list"]):
@@ -57,3 +57,6 @@ if __name__=="__main__":
     inplace=True)
   # output data mart csv
   util.output_csv(data, OUTPUT_DESTINATION)
+
+if __name__=="__main__":
+  main()
