@@ -1,6 +1,6 @@
 import sys
 sys.path.append("../common/")
-import utilities as util
+import DataTank.src.utils.csv_util as util
 
 # metadata
 CSV_METADATA = {
