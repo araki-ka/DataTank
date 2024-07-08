@@ -8,6 +8,7 @@ readme = "README.md"
 packages = [
   {include = "image_sampling", from = "src"},
   {include = "mhlw", from = "src/opendata"},
+  {include = "*", from = "src/opendata/tokyo_metropolitan_government"},
   {include = "utils", from = "src"},
 ]
 

@@ -1,6 +1,5 @@
-import sys
-sys.path.append("../common/")
-import utilities as util
+
+from utils import csv_util
 
 # metadata
 CSV_METADATA = {
@@ -17,13 +16,13 @@ OUTPUT_DESTINATION = "../../../data/Tokyo Metropolitan Government/Cultural Facil
 # main
 def main():
   # download and merge csv
-  data = util.marge_csv(CSV_METADATA)
+  data = csv_util.marge_csv(CSV_METADATA)
 
   # data preprocessing
-  data["緯度"] = util.replace(data, "緯度", ",", "")
+  data["緯度"] = csv_util.replace(data, "緯度", ",", "")
 
   # output data mart csv
-  util.output_csv(data, OUTPUT_DESTINATION)
+  csv_util.output_csv(data, OUTPUT_DESTINATION)
 
 if __name__=="__main__":
   main()
