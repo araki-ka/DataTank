@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "datatank"
+version = "0.0.1"
+description = ""
+authors = ["Kazuya Araki <lakeel.l0545@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+packages = [
+  {include = "image_sampling", from = "src"},
+  {include = "mhlw", from = "src/opendata"},
+  {include = "*", from = "src/opendata/tokyo_metropolitan_government"},
+  {include = "utils", from = "src"},
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "^2.0.0"
+matplotlib = "^3.9.0"
+opencv-python = "^4.10.0.84"
+pandas = "^2.2.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+flake8 = "^7.1.0"
+isort = "^5.13.2"
+pre-commit = "^3.7.1"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+import_heading_stdlib = "Standard Library"
+import_heading_thirdparty = "Third Party Library"
+import_heading_firstparty = "First Party Library"
+import_heading_localfolder = "Local Library"
+multi_line_output = 3
+include_trailing_comma = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
